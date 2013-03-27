@@ -2,13 +2,20 @@ maintainer       "Christoph Krybus"
 maintainer_email "ckrybus@googlemail.com"
 license          "Apache 2.0"
 description      "Installs and configures pgbouncer"
-version          "0.1"
+version          "0.2.0"
 
 recipe "pgbouncer", "Installs and configures pgbouncer"
 
-%w{ ubuntu debian }.each do |os|
+depends "smf"
+
+%w{ ubuntu debian smartos}.each do |os|
   supports os
 end
+
+attribute "pgbouncer/install_method",
+  :display_name => "PgBouncer install method",
+  :description => "Can be either 'source' or 'package'.",
+  :default => "package"
 
 attribute "pgbouncer/databases",
   :display_name => "PgBouncer databases",
