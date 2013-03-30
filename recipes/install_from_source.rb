@@ -40,6 +40,11 @@ end
 
 case node['platform']
   when 'smartos'
+    execute "install libevent" do
+       command "/opt/local/bin/pkgin -y install libevent"
+       not_if "/opt/local/bin/pkgin search libevent | grep \"libevent\" | grep \"=\" "
+    end
+
     execute "build pgbouncer" do
       command [
         "cd #{Chef::Config[:file_cache_path]}/#{local_dir}",
