@@ -34,6 +34,7 @@ default[:pgbouncer][:server_check_delay] = "10"
 # Connection limits
 default[:pgbouncer][:max_client_conn] = "100"
 default[:pgbouncer][:default_pool_size] = "10"
+default[:pgbouncer][:reserve_pool_size] = nil
 default[:pgbouncer][:log_connections] = "1"
 default[:pgbouncer][:log_disconnections] = "1"
 default[:pgbouncer][:log_pooler_errors] = "1"

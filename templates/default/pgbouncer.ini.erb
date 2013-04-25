@@ -92,7 +92,9 @@ max_client_conn = <%= @node['pgbouncer']['max_client_conn'] %>
 default_pool_size = <%= @node['pgbouncer']['default_pool_size'] %>
 
 ; how many additional connection to allow in case of trouble
-;reserve_pool_size = 5
+<% if @node['pgbouncer']['reserve_pool_size'] %>
+reserve_pool_size = <%= @node['pgbouncer']['reserve_pool_size'] %>
+<% end %>
 
 ; if a clients needs to wait more than this many seconds, use reserve pool
 ;reserve_pool_timeout = 3
