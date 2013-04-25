@@ -22,7 +22,7 @@ remote_file                = node.pgbouncer.source.url
 local_file                 = remote_file.gsub(%r{.*/}, '')        # pgbouncer-1.5.4.tar.gz
 local_dir                  = local_file.gsub(%r{\.tar\.gz}, '')   # pgbouncer-1.5.4
 
-node[:pgbouncer][:version] = local_dir.gsub(%r{.*-}, '')       # 1.5.4
+node.default[:pgbouncer][:version] = local_dir.gsub(%r{.*-}, '')  # 1.5.4
 
 remote_file "#{Chef::Config[:file_cache_path]}/#{local_file}" do
 	source remote_file
