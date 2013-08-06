@@ -90,6 +90,9 @@ server_check_delay = <%= @node['pgbouncer']['server_check_delay'] %>
 ; total number of clients that can connect
 max_client_conn = <%= @node['pgbouncer']['max_client_conn'] %>
 default_pool_size = <%= @node['pgbouncer']['default_pool_size'] %>
+<% if @node['pgbouncer']['min_pool_size'] %>
+min_pool_size = <%= @node['pgbouncer']['min_pool_size'] %>
+<% end %>
 
 ; how many additional connection to allow in case of trouble
 <% if @node['pgbouncer']['reserve_pool_size'] %>
