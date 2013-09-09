@@ -1,22 +1,3 @@
-#
-# Author:: Marius Ducea (marius@promethost.com)
-# Cookbook Name:: nodejs
-# Recipe:: source
-#
-# Copyright 2010-2012, Promet Solutions
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-#
 
 remote_file                = node.pgbouncer.source.url
 local_file                 = remote_file.gsub(%r{.*/}, '')        # pgbouncer-1.5.4.tar.gz
@@ -40,17 +21,18 @@ end
 
 case node['platform']
   when 'smartos'
-    execute "install libevent" do
-       command "/opt/local/bin/pkgin -y install libevent"
-       not_if "/opt/local/bin/pkgin search libevent | grep \"libevent\" | grep \"=\" "
-    end
+    package 'libevent'
 
     execute "build pgbouncer" do
       command [
         "cd #{Chef::Config[:file_cache_path]}/#{local_dir}",
-        "./configure 'CFLAGS=-m64' 'CXXFLAGS=-m64' 'LDFLAGS=-m64' --with-libevent=/opt/local --prefix=#{node.pgbouncer.source.install_dir}",
+        "./configure --with-libevent=/opt/local --prefix=#{node.pgbouncer.source.install_dir}",
         "make install"
       ].join(" && ")
+
+      environment 'CFLAGS' => '-m64',
+        'CXXFLAGS' => '-m64',
+        'LDFLAGS' => '-Wl,-R/opt/local/lib -L/opt/local/lib -m64'
       not_if { File.exists?("#{node.pgbouncer.source.install_dir}/bin/pgbouncer") }
     end
 
@@ -58,10 +40,12 @@ case node['platform']
       start_command "#{node.pgbouncer.source.install_dir}/bin/pgbouncer -d -u #{node.pgbouncer.os_user} /etc/pgbouncer/pgbouncer.ini"
       refresh_command ":kill -HUP"
       stop_command ":kill"
-      environment "LD_LIBRARY_PATH" => "/opt/local/lib"
       start_timeout 30
       stop_timeout 30
       working_directory "/"
+
+      ## TODO this can be removed once all instances compiled without LDFLAGS are gone
+      environment "LD_LIBRARY_PATH" => "/opt/local/lib"
     end
 
   else

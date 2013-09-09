@@ -102,12 +102,9 @@ For example, to create a basic connection pooler role for PostgreSQL databases:
     )
 
 
-License and Author
-==================
+## License and Author
 
-Author:: Christoph Krybus (<ckrybus@googlemail.com>)
-
-Copyright:: 2011, Christoph Krybus
+Copyright:: 2013, Wanelo, Inc
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -121,3 +118,8 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 
+## Attribution
+
+This was initially forked from a cookbook by Christoph Krybus, found at
+https://github.com/ckrybus/chef-pgbouncer. We've made so many changes that
+it is no longer anything like the original.

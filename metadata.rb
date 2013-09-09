@@ -1,16 +1,15 @@
-maintainer       "Christoph Krybus"
-maintainer_email "ckrybus@googlemail.com"
+maintainer       "Wanelo, Inc"
+maintainer_email "dev@wanelo.com"
 license          "Apache 2.0"
 description      "Installs and configures pgbouncer"
-version          "0.3.0"
+version          "0.4.0"
 
 recipe "pgbouncer", "Installs and configures pgbouncer"
 
+depends 'resource-control'
 depends "smf"
 
-%w{ ubuntu debian smartos}.each do |os|
-  supports os
-end
+supports "smartos"
 
 attribute "pgbouncer/install_method",
   :display_name => "PgBouncer install method",

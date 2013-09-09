@@ -11,9 +11,11 @@ end
 
 template "/etc/pgbouncer/pgbouncer.ini" do
   source "pgbouncer.ini.erb"
+  cookbook "pgbouncer"
   owner node.pgbouncer.os_user
   group node.pgbouncer.os_group
   mode "644"
+  variables node['pgbouncer']
   notifies :reload, resources(:service => "pgbouncer")
 end
 
@@ -22,6 +24,7 @@ template "/etc/pgbouncer/userlist.txt" do
   owner node.pgbouncer.os_user
   group node.pgbouncer.os_group
   mode "644"
+  variables "users" => node['pgbouncer']['userlist']
   notifies :reload, resources(:service => "pgbouncer")
 end
 
@@ -33,7 +36,7 @@ template "/etc/default/pgbouncer" do
   notifies :reload, resources(:service => "pgbouncer")
 end
 
-[node.pgbouncer.logfile].each do |file_name|
+[node.pgbouncer.log_file].each do |file_name|
   file file_name do
     owner node.pgbouncer.os_user
     group node.pgbouncer.os_group
