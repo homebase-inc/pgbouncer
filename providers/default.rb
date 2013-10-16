@@ -64,9 +64,10 @@ action :install do
         comment "PGBouncer instance for #{new_resource.name}"
         users node.pgbouncer.os_user
 
-        process_limits "max-file-descriptor" => {
-          "value" => new_resource.max_file_descriptors, "deny" => true
-        }
+        process_limits "max-file-descriptor" => [
+            {"value" => new_resource.max_file_descriptors, "level" => "basic", "deny" => true},
+            {"value" => new_resource.max_file_descriptors, "level" => "privileged", "deny" => true},
+        ]
       end
 
       smf service_name do
