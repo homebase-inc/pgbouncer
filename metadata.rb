@@ -2,7 +2,7 @@ maintainer       "Wanelo, Inc"
 maintainer_email "dev@wanelo.com"
 license          "Apache 2.0"
 description      "Installs and configures pgbouncer"
-version          "0.5.0"
+version          "0.5.1"
 
 recipe "pgbouncer", "Installs and configures pgbouncer"
 
@@ -111,3 +111,14 @@ attribute "pgbouncer/log_pooler_errors",
   :display_name => "PgBouncer log pooler errors",
   :description => "Log error messages pooler sends to clients.",
   :default => "1"
+
+# Timeouts
+attribute "pgbouncer/server_lifetime",
+  :display_name => "PgBouncer server_lifetime",
+  :description => "The pooler will try to close server connections that have been connected longer than this. Setting it to 0 means the connection is to be used only once, then close (seconds).",
+  :default => "3600"
+
+attribute "pgbouncer/server_idle_timeout",
+  :display_name => "PgBouncer server_lifetime",
+  :description => "If a server connection has been idle more than this many seconds it will be dropped. If 0 then timeout is disabled (seconds).",
+  :default => "600"

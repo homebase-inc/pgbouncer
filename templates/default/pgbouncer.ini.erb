@@ -117,10 +117,16 @@ log_pooler_errors = <%= @log_pooler_errors ? '1' : '0' %>
 ;;;
 
 ;; Close server connection if its been connected longer.
+<% if @server_lifetime %>
+server_lifetime = <%= @server_lifetime %>
+<% end %>
 ;server_lifetime = 1200
 
 ;; Close server connection if its not been used in this time.
 ;; Allows to clean unneccessary connections from pool after peak.
+<% if @server_idle_timeout %>
+server_idle_timeout = <%= @server_idle_timeout %>
+<% end %>
 ;server_idle_timeout = 60
 
 ;; Cancel connection attepmt if server does not answer takes longer.

@@ -46,7 +46,9 @@ action :install do
       'min_pool_size' => new_resource.min_pool_size,
       'log_connections' => new_resource.log_connections,
       'log_disconnections' => new_resource.log_disconnections,
-      'log_pooler_errors' => new_resource.log_pooler_errors
+      'log_pooler_errors' => new_resource.log_pooler_errors,
+      'server_lifetime' => new_resource.server_lifetime,
+      'server_idle_timeout' => new_resource.server_idle_timeout
 
     notifies :reload, "service[#{service_name}]"
   end

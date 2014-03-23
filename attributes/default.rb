@@ -46,6 +46,8 @@ default[:pgbouncer][:log_disconnections] = true
 default[:pgbouncer][:log_pooler_errors] = true
 
 # Timeouts
+default[:pgbouncer][:server_lifetime] = "3600"
+default[:pgbouncer][:server_idle_timeout] = "600"
 
 # Low-level tuning options
 

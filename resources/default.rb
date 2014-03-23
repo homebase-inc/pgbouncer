@@ -32,3 +32,6 @@ attribute :log_disconnections, :kind_of => [TrueClass, FalseClass], :default => 
 attribute :log_pooler_errors, :kind_of => [TrueClass, FalseClass], :default => true
 
 attribute :max_file_descriptors, :kind_of => Integer, :default => 2000
+
+attribute :server_lifetime, :kind_of => Integer, :default => 3600
+attribute :server_idle_timeout, :kind_of => Integer, :default => 600
