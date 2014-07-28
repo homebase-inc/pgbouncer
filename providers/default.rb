@@ -2,10 +2,6 @@
 action :install do
   service_name = "pgbouncer-#{new_resource.name}"
 
-  service service_name do
-    supports :status => true, :start => true, :stop => true, :restart => true, :reload => true
-  end
-
   log_file = new_resource.log_file || "/var/log/#{service_name}.log"
   pid_file = new_resource.pid_file || "/tmp/#{service_name}.pid"
   auth_file = new_resource.auth_file || "/etc/pgbouncer/userlist-#{new_resource.name}.txt"
@@ -87,6 +83,10 @@ action :install do
         notifies :start, "service[#{service_name}]"
       end
 
+  end
+
+  service service_name do
+    supports :status => true, :start => true, :stop => true, :restart => true, :reload => true
   end
 
 end
