@@ -1,5 +1,4 @@
 
-package "pgbouncer" do
+package 'pgbouncer' do
   action :upgrade
 end
-
