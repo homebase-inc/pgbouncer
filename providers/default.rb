@@ -5,6 +5,8 @@ action :install do
   pid_file = new_resource.pid_file || "/tmp/#{service_name}.pid"
   auth_file = new_resource.auth_file || "/etc/pgbouncer/userlist-#{new_resource.name}.txt"
 
+  directory '/etc/pgbouncer'
+
   template auth_file do
     source 'userlist.txt.erb'
     cookbook 'pgbouncer'
