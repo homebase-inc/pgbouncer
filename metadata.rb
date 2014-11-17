@@ -2,7 +2,7 @@ maintainer 'Wanelo, Inc'
 maintainer_email 'dev@wanelo.com'
 license 'Apache 2.0'
 description 'Installs and configures pgbouncer'
-version '0.5.4'
+version '0.5.5'
 
 recipe 'pgbouncer', 'Installs and configures pgbouncer'
 

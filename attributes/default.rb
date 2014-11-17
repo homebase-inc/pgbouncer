@@ -44,6 +44,8 @@ default[:pgbouncer][:min_pool_size] = nil
 default[:pgbouncer][:log_connections] = true
 default[:pgbouncer][:log_disconnections] = true
 default[:pgbouncer][:log_pooler_errors] = true
+default[:pgbouncer][:server_connect_timeout] = nil
+default[:pgbouncer][:server_login_retry] = nil
 
 # Timeouts
 default[:pgbouncer][:server_lifetime] = '3600'
