@@ -45,7 +45,9 @@ action :install do
               'log_disconnections' => new_resource.log_disconnections,
               'log_pooler_errors' => new_resource.log_pooler_errors,
               'server_lifetime' => new_resource.server_lifetime,
-              'server_idle_timeout' => new_resource.server_idle_timeout
+              'server_idle_timeout' => new_resource.server_idle_timeout,
+              'server_connect_timeout' => new_resource.server_connect_timeout,
+              'server_login_retry' => new_resource.server_login_retry
 
     notifies :reload, "service[#{service_name}]"
   end
