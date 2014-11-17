@@ -36,5 +36,5 @@ attribute :max_file_descriptors, kind_of: Integer, default: 2000
 attribute :server_lifetime, kind_of: Integer, default: 3600
 attribute :server_idle_timeout, kind_of: Integer, default: 600
 
-attribute :server_connect, kind_of: Integer, default: 15
+attribute :server_connect_timeout, kind_of: Integer, default: 15
 attribute :server_login_retry, kind_of: Integer, default: 15
