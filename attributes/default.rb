@@ -50,5 +50,6 @@ default[:pgbouncer][:server_login_retry] = nil
 # Timeouts
 default[:pgbouncer][:server_lifetime] = '3600'
 default[:pgbouncer][:server_idle_timeout] = '600'
+default[:pgbouncer][:idle_transaction_timeout] = nil
 
 # Low-level tuning options

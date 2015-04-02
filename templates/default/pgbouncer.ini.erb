@@ -129,6 +129,12 @@ server_idle_timeout = <%= @server_idle_timeout %>
 <% end %>
 ;server_idle_timeout = 60
 
+; If client has been in "idle in transaction" state longer, it will be disconnected. [seconds]
+<% if @idle_transaction_timeout %>
+idle_transaction_timeout = <%= @idle_transaction_timeout %>
+<% end %>
+;idle_transaction_timeout = 0
+
 ;; Cancel connection attepmt if server does not answer takes longer.
 <% if @server_connect_timeout %>
 server_connect_timeout = <%= @server_connect_timeout %>
