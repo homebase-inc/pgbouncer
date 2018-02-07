@@ -1,11 +1,14 @@
 case node['platform_family']
 when 'smartos'
-  default['pgbouncer']['init_method'] = 'smf'
+  default[:pgbouncer][:init_method]          = 'smf'
+  default[:pgbouncer][:source][:install_dir] = '/opt/local'
+else
+  default[:pgbouncer][:init_method]          = 'service'
+  default[:pgbouncer][:source][:install_dir] = '/usr/local'
 end
 
 default[:pgbouncer][:install_method]          = 'source'
-default[:pgbouncer][:source][:url]            = 'http://pgfoundry.org/frs/download.php/3393/pgbouncer-1.5.4.tar.gz'
-default[:pgbouncer][:source][:install_dir]    = '/opt/local'
+default[:pgbouncer][:source][:url]            = "https://pgbouncer.github.io/downloads/files/1.8.1/pgbouncer-1.8.1.tar.gz"
 
 default[:pgbouncer][:databases] = {}
 default[:pgbouncer][:userlist] = {}

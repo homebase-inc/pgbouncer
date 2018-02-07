@@ -11,6 +11,7 @@ depends 'resource-control'
 depends 'smf'
 
 supports 'smartos'
+supports 'ubuntu'
 
 attribute 'pgbouncer/install_method',
           display_name: 'PgBouncer install method',

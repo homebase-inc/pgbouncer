@@ -74,14 +74,13 @@ action :install do
 
     smf service_name do
       project service_name
-      start_command "#{node.pgbouncer.source.install_dir}/bin/pgbouncer -d -u #{node.pgbouncer.os_user} /etc/pgbouncer/#{service_name}.ini"
+      start_command "#{node['pgbouncer']['source']['install_dir']}/bin/pgbouncer -d -u #{node.pgbouncer.os_user} /etc/pgbouncer/#{service_name}.ini"
       refresh_command ':kill -HUP'
       stop_command ':kill'
       start_timeout 30
       stop_timeout 30
       working_directory '/'
 
-      ## TODO this can be removed once all instances compiled without LDFLAGS are gone
       environment 'LD_LIBRARY_PATH' => '/opt/local/lib'
 
       notifies :start, "service[#{service_name}]"
