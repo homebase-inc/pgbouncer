@@ -19,19 +19,21 @@ case node['platform']
 
   else
     systemd_unit 'pgbouncer.service' do
-      content <<-EOF
-[Unit]
-Description=PgBouncer
-After=network.target
-
-[Service]
-User=#{node['pgbouncer']['os_user']}
-WorkingDirectory=/home/#{node['pgbouncer']['os_user']}
-ExecStart=#{node['pgbouncer']['source']['install_dir']}/bin/pgbouncer /etc/pgbouncer/pgbouncer.ini
-ExecReload=#{node['pgbouncer']['source']['install_dir']}/bin/pgbouncer -R /etc/pgbouncer/pgbouncer.ini
-
-[Install]
-WantedBy=multi-user.target
+      content <<-EOF.gsub(/^\s+/, '')
+        [Unit]
+        Description=PgBouncer
+        After=network.target
+        
+        [Service]
+        User=#{node['pgbouncer']['os_user']}
+        WorkingDirectory=/home/#{node['pgbouncer']['os_user']}
+        ExecStart=#{node['pgbouncer']['source']['install_dir']}/bin/pgbouncer /etc/pgbouncer/pgbouncer.ini
+        ExecReload=#{node['pgbouncer']['source']['install_dir']}/bin/pgbouncer -R /etc/pgbouncer/pgbouncer.ini
+        Restart=always
+        RestartSec=3
+        
+        [Install]
+        WantedBy=multi-user.target
       EOF
 
       action [:create, :enable]
